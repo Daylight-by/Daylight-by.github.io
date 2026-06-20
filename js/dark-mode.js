@@ -1,8 +1,11 @@
-/* ===== 深色模式切换 - 导航栏内嵌版 ===== */
+/* ===== 深色模式切换 - 导航栏内嵌版（支持 pjax） ===== */
 (function() {
   function init() {
     var nav = document.getElementById('nav');
     if (!nav) return;
+
+    /* 防止重复添加 */
+    if (nav.querySelector('.nav-btn-dark')) return;
 
     /* 查找或创建导航栏右侧控制区 */
     var navControls = nav.querySelector('.nav-right-controls');
@@ -17,13 +20,8 @@
     toggle.className = 'nav-btn nav-btn-dark';
     toggle.title = '切换深色模式';
 
-    var isDark = localStorage.getItem('dark-mode') === 'true';
-    if (isDark) {
-      document.documentElement.classList.add('dark-mode');
-      toggle.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-      toggle.innerHTML = '<i class="fas fa-moon"></i>';
-    }
+    var isDark = document.documentElement.classList.contains('dark-mode');
+    toggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
 
     navControls.appendChild(toggle);
 
@@ -36,9 +34,19 @@
     });
   }
 
+  /* 读取保存的状态 */
+  if (localStorage.getItem('dark-mode') === 'true') {
+    document.documentElement.classList.add('dark-mode');
+  }
+
+  /* 初始化 */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  /* pjax 页面切换后重新注入 */
+  document.addEventListener('pjax:complete', function() { init(); });
+  window.addEventListener('hexo:page-loaded', function() { init(); });
 })();
