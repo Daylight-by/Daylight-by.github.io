@@ -69,6 +69,35 @@ body {
   color: var(--blog-text) !important;
 }
 
+/* ===== 导航栏右侧控制区 ===== */
+.nav-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 16px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blog-text2, #606266);
+  font-size: 14px;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.nav-btn:hover {
+  background: var(--blog-hover, #f5f7fa);
+  color: var(--blog-text, #303133);
+}
+
 /* ===== 卡片样式 ===== */
 .layout > div:first-child,
 #recent-posts > .recent-post-item,
@@ -191,138 +220,16 @@ body {
   border: 1px solid var(--blog-border) !important;
 }
 
-/* ===== 深色模式切换按钮 ===== */
-.dark-mode-toggle {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  z-index: 999;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--blog-card);
-  border: 1px solid var(--blog-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: all 0.3s;
-  font-size: 18px;
-}
-
-.dark-mode-toggle:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transform: scale(1.05);
-}
-
-/* ===== 深色模式 ===== */
-html.dark-mode {
-  --blog-bg: #181818;
-  --blog-card: #232323;
-  --blog-text: #e5e5e5;
-  --blog-text2: #b0b0b0;
-  --blog-text3: #808080;
-  --blog-border: #333;
-  --blog-hover: #2a2a2a;
-  color-scheme: dark;
-}
-
-html.dark-mode body {
-  background-color: var(--blog-bg) !important;
-  color: var(--blog-text) !important;
-}
-
-html.dark-mode #nav {
-  background: rgba(35,35,35,0.95) !important;
-  border-bottom-color: var(--blog-border) !important;
-}
-
-html.dark-mode ::-webkit-scrollbar-thumb { background: #555; }
-html.dark-mode ::-webkit-scrollbar-thumb:hover { background: #777; }
-html.dark-mode ::selection { background: #e5e5e5; color: #181818; }
-
-html.dark-mode #footer {
-  background: #111 !important;
-}
-
-html.dark-mode #article-container figure.highlight {
-  border-color: var(--blog-border) !important;
-}
-
-/* ===== 响应式优化 ===== */
-@media (max-width: 768px) {
-  #nav {
-    background: var(--blog-card) !important;
-  }
-
-  .dark-mode-toggle {
-    bottom: 80px;
-    right: 15px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .music-panel {
-    width: 100%;
-    right: -100%;
-    border-radius: 0 !important;
-    top: 0;
-    transform: none;
-    max-height: 100vh;
-  }
-
-  .music-panel.open {
-    right: 0;
-  }
-
-  .music-toggle-btn {
-    top: 50% !important;
-    right: 0 !important;
-    width: 32px !important;
-    height: 32px !important;
-  }
-}
-
-/* ===== 音乐面板 ===== */
-.music-toggle-btn {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  z-index: 1000;
-  width: 36px;
-  height: 36px;
-  border-radius: 6px 0 0 6px;
-  background: #303133;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
-  color: #fff;
-  font-size: 16px;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-}
-
-.music-toggle-btn:hover,
-.music-toggle-btn.active {
-  background: #000;
-  color: #fff;
-  width: 42px;
-}
-
+/* ===== 音乐面板（从右侧滑出） ===== */
 .music-panel {
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   right: -360px;
   width: 340px;
-  max-height: 70vh;
+  height: 100vh;
   background: var(--blog-card, #fff);
-  border: 1px solid var(--blog-border, #e4e7ed);
-  border-radius: 10px 0 0 10px;
-  z-index: 999;
+  border-left: 1px solid var(--blog-border, #e4e7ed);
+  z-index: 1100;
   transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   display: flex;
@@ -332,12 +239,6 @@ html.dark-mode #article-container figure.highlight {
 
 .music-panel.open {
   right: 0;
-}
-
-.music-panel.open ~ .music-toggle-btn,
-.music-toggle-btn.active {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .music-panel-header {
@@ -525,27 +426,75 @@ html.dark-mode .music-progress-fill {
   margin-top: 1px;
 }
 
-/* 深色模式音乐面板 */
-html.dark-mode .music-toggle-btn {
-  background: var(--blog-card);
-  border-color: var(--blog-border);
-  color: var(--blog-text2);
+/* ===== 深色模式 ===== */
+html.dark-mode {
+  --blog-bg: #181818;
+  --blog-card: #232323;
+  --blog-text: #e5e5e5;
+  --blog-text2: #b0b0b0;
+  --blog-text3: #808080;
+  --blog-border: #333;
+  --blog-hover: #2a2a2a;
+  color-scheme: dark;
 }
 
-html.dark-mode .music-toggle-btn:hover,
-html.dark-mode .music-toggle-btn.active {
-  background: #e5e5e5;
-  color: #181818;
-  border-color: #e5e5e5;
+html.dark-mode body {
+  background-color: var(--blog-bg) !important;
+  color: var(--blog-text) !important;
+}
+
+html.dark-mode #nav {
+  background: rgba(35,35,35,0.95) !important;
+  border-bottom-color: var(--blog-border) !important;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb { background: #555; }
+html.dark-mode ::-webkit-scrollbar-thumb:hover { background: #777; }
+html.dark-mode ::selection { background: #e5e5e5; color: #181818; }
+
+html.dark-mode #footer {
+  background: #111 !important;
+}
+
+html.dark-mode #article-container figure.highlight {
+  border-color: var(--blog-border) !important;
 }
 
 html.dark-mode .music-panel {
   background: var(--blog-card);
   border-color: var(--blog-border);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  box-shadow: -4px 0 30px rgba(0,0,0,0.3);
 }
 
 html.dark-mode .music-panel-item:hover,
 html.dark-mode .music-panel-item.active {
   background: var(--blog-hover);
+}
+
+/* ===== 响应式优化 ===== */
+@media (max-width: 768px) {
+  #nav {
+    background: var(--blog-card) !important;
+  }
+
+  .nav-right-controls {
+    gap: 2px;
+    margin-left: 8px;
+  }
+
+  .nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .music-panel {
+    width: 100%;
+    right: -100%;
+    border-radius: 0 !important;
+  }
+
+  .music-panel.open {
+    right: 0;
+  }
 }
