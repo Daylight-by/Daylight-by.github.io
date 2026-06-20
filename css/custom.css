@@ -265,64 +265,79 @@ html.dark-mode #article-container figure.highlight {
 
   .music-panel {
     width: 100%;
+    right: -100%;
+    border-radius: 0 !important;
+    top: 0;
+    transform: none;
+    max-height: 100vh;
+  }
+
+  .music-panel.open {
     right: 0;
-    border-radius: 12px 12px 0 0 !important;
-    top: auto;
-    bottom: 0;
-    max-height: 70vh;
   }
 
   .music-toggle-btn {
-    right: 60px !important;
+    top: 50% !important;
+    right: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
   }
 }
 
 /* ===== 音乐面板 ===== */
 .music-toggle-btn {
   position: fixed;
-  top: 18px;
-  right: 120px;
+  top: 50%;
+  right: 0;
   z-index: 1000;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  background: var(--blog-card, #fff);
-  border: 1px solid var(--blog-border, #e4e7ed);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px 0 0 6px;
+  background: #303133;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s;
-  color: var(--blog-text2, #606266);
-  font-size: 14px;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
 }
 
 .music-toggle-btn:hover,
 .music-toggle-btn.active {
-  background: #303133;
+  background: #000;
   color: #fff;
-  border-color: #303133;
+  width: 42px;
 }
 
 .music-panel {
   position: fixed;
-  top: 60px;
+  top: 50%;
+  transform: translateY(-50%);
   right: -360px;
   width: 340px;
-  max-height: calc(100vh - 80px);
+  max-height: 70vh;
   background: var(--blog-card, #fff);
   border: 1px solid var(--blog-border, #e4e7ed);
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   z-index: 999;
   transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  box-shadow: -4px 0 30px rgba(0,0,0,0.1);
 }
 
 .music-panel.open {
-  right: 20px;
+  right: 0;
+}
+
+.music-panel.open ~ .music-toggle-btn,
+.music-toggle-btn.active {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .music-panel-header {
