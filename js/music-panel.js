@@ -14,16 +14,19 @@
     if (!nav) return;
 
     /* 防止重复添加（pjax 可能多次触发） */
-    if (nav.querySelector('.nav-right-controls')) return;
+    if (nav.querySelector('.nav-btn-music')) return;
 
-    /* --- 导航栏右侧控制区 --- */
-    var navControls = document.createElement('div');
-    navControls.className = 'nav-right-controls';
-    navControls.innerHTML =
+    /* --- 导航栏右侧控制区（查找或创建，与 dark-mode.js 共享） --- */
+    var navControls = nav.querySelector('.nav-right-controls');
+    if (!navControls) {
+      navControls = document.createElement('div');
+      navControls.className = 'nav-right-controls';
+      nav.appendChild(navControls);
+    }
+    navControls.insertAdjacentHTML('beforeend',
       '<button class="nav-btn nav-btn-music" title="播放/暂停"><i class="fas fa-' + (isPlaying ? 'pause' : 'play') + '"></i></button>' +
       '<button class="nav-btn nav-btn-next" title="下一首"><i class="fas fa-step-forward"></i></button>' +
-      '<button class="nav-btn nav-btn-list" title="播放列表"><i class="fas fa-list"></i></button>';
-    nav.appendChild(navControls);
+      '<button class="nav-btn nav-btn-list" title="播放列表"><i class="fas fa-list"></i></button>');
 
     var playBtn = navControls.querySelector('.nav-btn-music');
     var nextBtn = navControls.querySelector('.nav-btn-next');
