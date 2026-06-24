@@ -22,7 +22,11 @@ html {
 }
 
 body {
-  background-color: var(--blog-bg) !important;
+  background-image: url('/images/bg.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
   color: var(--blog-text) !important;
   font-family: var(--blog-sans) !important;
   line-height: 1.6;
@@ -107,7 +111,7 @@ body {
 #tag-cloud,
 .layout_post > #post,
 .read-mode .layout_post > #post {
-  background: var(--blog-card) !important;
+  background: rgba(255,255,255,0.85) !important;
   border: 1px solid var(--blog-border) !important;
   border-radius: 10px !important;
   box-shadow: none !important;
@@ -439,7 +443,10 @@ html.dark-mode {
 }
 
 html.dark-mode body {
-  background-color: var(--blog-bg) !important;
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/bg.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center center !important;
   color: var(--blog-text) !important;
 }
 
@@ -453,7 +460,18 @@ html.dark-mode ::-webkit-scrollbar-thumb:hover { background: #777; }
 html.dark-mode ::selection { background: #e5e5e5; color: #181818; }
 
 html.dark-mode #footer {
-  background: #111 !important;
+  background: rgba(17,17,17,0.85) !important;
+}
+
+html.dark-mode .layout > div:first-child,
+html.dark-mode #recent-posts > .recent-post-item,
+html.dark-mode #aside-content .card-widget,
+html.dark-mode #page .category-lists,
+html.dark-mode #archive .article-sort,
+html.dark-mode #tag-cloud,
+html.dark-mode .layout_post > #post,
+html.dark-mode .read-mode .layout_post > #post {
+  background: rgba(35,35,35,0.85) !important;
 }
 
 html.dark-mode #article-container figure.highlight {
