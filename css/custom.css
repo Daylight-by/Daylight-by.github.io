@@ -41,6 +41,18 @@ body {
 /* 选中文字颜色 */
 ::selection { background: #303133; color: #fff; }
 
+/* ===== 页面顶部横幅背景 ===== */
+#page-header {
+  background-image: url('/images/bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-color: transparent !important;
+}
+
+#page-header.full_page {
+  background-attachment: fixed !important;
+}
+
 /* ===== 导航栏 ===== */
 #nav {
   background: var(--blog-card) !important;
