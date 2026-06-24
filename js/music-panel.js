@@ -96,7 +96,9 @@
     /* --- 加载播放列表（只加载一次） --- */
     if (!loaded) {
       loaded = true;
-      fetch('/music/playlist.json').then(function(r) { return r.json(); }).then(function(list) {
+
+      /* 先从情侣博客 API 加载动态歌单，失败则用本地歌单 */
+      function loadPlaylist(list) {
         playlist = list;
         list.forEach(function(song, i) {
           var item = document.createElement('div');
@@ -108,9 +110,25 @@
         if (list.length > 0) {
           panel.querySelector('.music-panel-name').textContent = list[0].name;
           panel.querySelector('.music-panel-artist').textContent = list[0].artist;
-          panel.querySelector('.music-panel-cover').src = list[0].cover;
+          if (list[0].cover) panel.querySelector('.music-panel-cover').src = list[0].cover;
         }
-      }).catch(function(e) { console.warn('加载播放列表失败:', e); });
+      }
+
+      fetch('https://love.bsqdsq.top/api/audio/playlist')
+        .then(function(r) { if (!r.ok) throw new Error('API error'); return r.json(); })
+        .then(function(list) {
+          if (list.length > 0) {
+            loadPlaylist(list);
+          } else {
+            /* API 返回空列表，回退到本地 */
+            fetch('/music/playlist.json').then(function(r) { return r.json(); }).then(loadPlaylist).catch(function() {});
+          }
+        })
+        .catch(function() {
+          /* API 不可用，回退到本地播放列表 */
+          console.warn('情侣博客 API 不可用，使用本地播放列表');
+          fetch('/music/playlist.json').then(function(r) { return r.json(); }).then(loadPlaylist).catch(function(e) { console.warn('加载播放列表失败:', e); });
+        });
     }
 
     /* --- 导航栏按钮事件 --- */
