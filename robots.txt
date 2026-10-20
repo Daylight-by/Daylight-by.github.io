@@ -1,0 +1,11 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /components
+Disallow: /components1
+Disallow: /components2
+Disallow: /components3
+Disallow: /components-mono
+
+Host: https://bsqdsq.top
+Sitemap: https://bsqdsq.top/sitemap.xml
