@@ -164,29 +164,35 @@ admin / admin123，进去就是房态看板。
 公安上传、门锁、OTA 是适配层，用模拟数据演示。
 `,hint:"来财酒店 PMS · 33 张表"},{name:"yudao-designer.md",kind:"file",content:`# 设计师家装服务平台
 
-基于芋道（yudao，2025.10）商城版二次开发，连接业主与设计师的家装服务平台。
+实习期间跟随团队参与开发的项目，基于芋道（yudao，2025.10）商城版二次开发，
+连接业主与设计师的家装服务平台。平台级官方模块由团队维护，我跟着导师和同事做业务。
 
-# 自研了什么
+# 项目业务
 
 - designer 设计师模块：档案、入驻审核、认证等级、服务项、排班节假日、
   预约下单、作品集 / 图片 / 空间、全景图、技能评分、评价、收藏、会话、通知、统计。
 - designerCase 家装案例模块：案例主档、案例空间、家装案例。
 
-# 技术取舍
+两个模块是团队协作成果，我参与了业务接口、Service 逻辑和数据访问层的开发，
+跟着 code review 对齐团队写法，走完了需求、编码、联调到上线全过程。
+
+# 学到的东西
 
 业务实体继承 TenantBaseDO，走多租户隔离和数据权限；
 预约、排班、状态流转用枚举 + service 校验，防时间冲突和状态回跳。
-官方模块一行没动，根 pom 加 module、server pom 引依赖即接入。
+官方模块一行没动，根 pom 加 module、server pom 引依赖即接入 ——
+协作项目里守住边界比「顺手改一下」更重要。
 
-两个自研模块约 300 个 Java 类、二十多张 MyBatis Mapper，
-生产环境以 Spring Boot 48080 端口运行。
+两个业务模块约 300 个 Java 类、二十多张 MyBatis Mapper，
+项目已在生产环境以 Spring Boot 48080 端口运行。
 
 # 链接
 
 源码为私有仓库，仅作展示。
 `,hint:"设计师家装平台 · 芋道二次开发"},{name:"asean-risk.md",kind:"file",content:`# 东盟跨境中小商户智能风控预警平台
 
-竞赛 \xb7 二等奖。面向中国—东盟跨境中小商户的可解释风控与事前预警原型。
+2026 年「数据要素 \xd7」大赛广西分赛（高校赛道）暨第六届广西公共数据开放创新应用大赛 \xb7 二等奖。
+面向中国—东盟跨境中小商户的可解释风控与事前预警原型，我负责整体设计与全栈实现。
 
 # 评分模型
 
@@ -208,7 +214,7 @@ admin / admin123，进去就是房态看板。
 # 链接
 
 github.com/Daylight-by/asean-risk-warning-platform（公开）
-`,hint:"东盟跨境风控 · 竞赛二等奖"},{name:"portfolio-site.md",kind:"file",content:`# 本站 \xb7 作品集
+`,hint:"东盟跨境风控 · 数据要素×大赛二等奖"},{name:"portfolio-site.md",kind:"file",content:`# 本站 \xb7 作品集
 
 Next.js 16 静态导出，托管在 GitHub Pages，绑了自定义域名。
 
